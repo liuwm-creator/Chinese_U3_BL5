@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香港世界之最：地標視聽導賞 | 粵語語音與動態實景</title>
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 Google Fonts 思源黑體與 Noto Serif TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+    <!-- 載入 FontAwesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans HK"', 'sans-serif'],
+                        serif: ['"Noto Serif TC"', 'serif'],
+                    },
+                    colors: {
+                        harbour: {
+                            950: '#040914',
+                            900: '#081226',
+                            800: '#0F2142',
+                            700: '#193463',
+                        },
+                        gold: {
+                            300: '#FDE68A',
+                            400: '#FBBF24',
+                            500: '#D97706',
+                            600: '#B45309',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 自定義滾動條與動畫效果 */
+        body {
+            background-color: #040914;
+            color: #F8FAFC;
+            overflow-x: hidden;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FEF08A 0%, #F59E0B 50%, #D97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-panel {
+            background: rgba(15, 33, 66, 0.55);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(251, 191, 36, 0.18);
+        }
+        .glass-card-active {
+            background: linear-gradient(145deg, rgba(25, 52, 99, 0.85), rgba(8, 18, 38, 0.95));
+            border: 1px solid rgba(251, 191, 36, 0.65);
+            box-shadow: 0 10px 35px -5px rgba(245, 158, 11, 0.25);
+        }
+        /* 聲波跳動動畫 */
+        @keyframes soundWave {
+            0%, 100% { height: 6px; }
+            50% { height: 24px; }
+        }
+        .wave-bar {
+            width: 3px;
+            border-radius: 9999px;
+            background: linear-gradient(to top, #D97706, #FDE68A);
+            transition: height 0.2s ease;
+        }
+        .playing .wave-bar:nth-child(1) { animation: soundWave 0.7s infinite ease-in-out 0.1s; }
+        .playing .wave-bar:nth-child(2) { animation: soundWave 0.5s infinite ease-in-out 0.3s; }
+        .playing .wave-bar:nth-child(3) { animation: soundWave 0.8s infinite ease-in-out 0.0s; }
+        .playing .wave-bar:nth-child(4) { animation: soundWave 0.6s infinite ease-in-out 0.4s; }
+        .playing .wave-bar:nth-child(5) { animation: soundWave 0.75s infinite ease-in-out 0.2s; }
+        .playing .wave-bar:nth-child(6) { animation: soundWave 0.55s infinite ease-in-out 0.15s; }
+        .playing .wave-bar:nth-child(7) { animation: soundWave 0.65s infinite ease-in-out 0.35s; }
+
+        /* 隱藏滾動條但保留功能 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- 頂部導覽列 -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-amber-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-slate-950 font-black text-lg shadow-lg shadow-amber-500/20">
+                    港
+                </div>
+                <div>
+                    <h1 class="font-serif font-bold text-base sm:text-lg tracking-wider text-white">香港世界之最</h1>
+                    <p class="text-[11px] text-amber-300/80 tracking-widest hidden sm:block">HONG KONG WORLD RECORDS · 視聽導賞</p>
+                </div>
+            </div>
+            <nav class="flex items-center space-x-2 sm:space-x-6 text-xs sm:text-sm font-medium">
+                <a href="#theatre" class="text-slate-200 hover:text-amber-400 transition px-2 py-1 rounded-lg">視聽劇場</a>
+                <a href="#landmarks" class="text-slate-200 hover:text-amber-400 transition px-2 py-1 rounded-lg">三大地標</a>
+                <a href="#quiz-section" class="bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 px-3 py-1.5 rounded-full transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-award"></i>
+                    <span>知識挑戰</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主視覺 Hero 區塊 -->
+    <section class="relative pt-10 pb-8 sm:pt-14 sm:pb-12 overflow-hidden">
+        <!-- 背景維港光暈裝飾 -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[90vw] max-w-4xl h-64 bg-amber-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-harbour-800/80 border border-amber-400/30 text-amber-300 text-xs font-medium mb-4">
+                <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                <span>支援道地粵語（廣東話）語音導賞 × 動態實景模擬影片</span>
+            </div>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4 leading-tight">
+                探索東方之珠的<span class="gold-gradient-text">三項世界紀錄</span>
+            </h2>
+            <p class="max-w-2xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed">
+                從繁華中環的半山扶手電梯、大嶼山雲霧間的天壇大佛，到橫跨海峽的青馬大橋。戴上耳機，透過動態光影影片與親切的粵語旁白，感受香港工程與文化的非凡魅力。
+            </p>
+        </div>
+    </section>
+
+    <!-- 地標快速切換卡片列 -->
+    <section id="landmarks" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="landmark-selector">
+            <!-- 由 JavaScript 動態渲染三個地標選擇卡片 -->
+        </div>
+    </section>
+
+    <!-- 核心互動區：動態影片播放器 + 粵語語音導賞控制台 -->
+    <main id="theatre" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div class="glass-panel rounded-3xl overflow-hidden shadow-2xl border border-amber-400/25">
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+                
+                <!-- 左側（7欄）：HTML5 Canvas 動態實景模擬影片播放器 -->
+                <div class="lg:col-span-7 bg-slate-950 flex flex-col justify-between relative border-b lg:border-b-0 lg:border-r border-slate-800/80">
+                    <!-- 影片頂部狀態列 -->
+                    <div class="absolute top-0 inset-x-0 z-20 p-4 flex items-center justify-between bg-gradient-to-b from-black/80 via-black/40 to-transparent pointer-events-none">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-1 rounded-md bg-red-600/90 text-white text-[11px] font-bold tracking-wider flex items-center gap-1.5 shadow">
+                                <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                                實景導賞影片
+                            </span>
+                            <span id="video-badge-location" class="px-2.5 py-1 rounded-md bg-black/60 backdrop-blur text-amber-300 text-xs border border-amber-400/30">
+                                香港 · 中環
+                            </span>
+                        </div>
+                        <div id="video-world-record-tag" class="hidden sm:block px-3 py-1 rounded-full bg-amber-500/20 backdrop-blur border border-amber-400/40 text-amber-200 text-xs font-medium">
+                            世界最長戶外有蓋自動扶手電梯
+                        </div>
+                    </div>
+
+                    <!-- 畫布容器（響應式比例） -->
+                    <div id="canvas-wrapper" class="relative w-full aspect-video bg-harbour-950 overflow-hidden group cursor-pointer" onclick="toggleMasterPlay()">
+                        <canvas id="landmark-canvas" class="w-full h-full block"></canvas>
+                        
+                        <!-- 影片同步粵語字幕疊加層 -->
+                        <div class="absolute bottom-14 inset-x-4 sm:inset-x-8 z-20 text-center pointer-events-none">
+                            <div id="video-subtitle" class="inline-block px-4 py-2 rounded-xl bg-black/75 backdrop-blur-md text-white text-sm sm:text-base font-medium tracking-wide border border-white/10 shadow-lg transition-all duration-300">
+                                點擊「同步播放影片及粵語導賞」開始體驗
+                            </div>
+                        </div>
+
+                        <!-- 中央懸浮播放按鈕（暫停時顯示） -->
+                        <div id="center-play-overlay" class="absolute inset-0 z-20 flex items-center justify-center bg-black/30 group-hover:bg-black/20 transition">
+                            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-amber-500/90 hover:bg-amber-400 text-slate-950 flex items-center justify-center shadow-2xl shadow-amber-500/40 transform group-hover:scale-105 transition">
+                                <i class="fa-solid fa-play text-2xl sm:text-3xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 影片控制列 -->
+                    <div class="p-4 bg-harbour-950/95 border-t border-slate-800/80 space-y-2.5">
+                        <!-- 進度條 -->
+                        <div class="flex items-center gap-3 text-xs text-slate-400 font-mono">
+                            <span id="video-current-time">00:00</span>
+                            <div id="video-progress-bar" class="flex-1 h-2 bg-slate-800 rounded-full overflow-hidden cursor-pointer relative group" onclick="seekVideo(event)">
+                                <div id="video-progress-fill" class="h-full bg-gradient-to-r from-amber-500 to-yellow-300 w-0 rounded-full transition-all duration-100"></div>
+                            </div>
+                            <span id="video-duration">00:30</span>
+                        </div>
+                        <!-- 影片操作按鈕 -->
+                        <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+                            <div class="flex items-center gap-2">
+                                <button onclick="toggleMasterPlay()" id="btn-master-play" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-amber-500/20 transition">
+                                    <i class="fa-solid fa-play"></i>
+                                    <span>同步播放影片及粵語導賞</span>
+                                </button>
+                                <button onclick="restartExperience()" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 transition" title="重新開始">
+                                    <i class="fa-solid fa-rotate-left"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button onclick="toggleFullscreen()" class="px-3 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 text-xs flex items-center gap-1.5 transition">
+                                    <i class="fa-solid fa-expand"></i>
+                                    <span class="hidden sm:inline">全螢幕</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右側（5欄）：粵語語音導賞播放器 & 詳細景點介紹 -->
+                <div class="lg:col-span-5 p-5 sm:p-7 flex flex-col justify-between bg-harbour-900/40">
+                    <div>
+                        <!-- 標題與世界紀錄徽章 -->
+                        <div class="flex items-start justify-between gap-3 mb-3">
+                            <div>
+                                <span id="detail-record-badge" class="inline-block px-2.5 py-0.5 rounded-md bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-semibold mb-1.5">
+                                    世界最長戶外有蓋自動扶手電梯
+                                </span>
+                                <h3 id="detail-title" class="font-serif text-2xl sm:text-3xl font-bold text-white">
+                                    中環至半山自動扶手電梯系統
+                                </h3>
+                            </div>
+                        </div>
+
+                        <!-- 關鍵數據小卡 -->
+                        <div id="detail-stats" class="grid grid-cols-3 gap-2.5 my-4">
+                            <!-- JS 動態填入數據 -->
+                        </div>
+
+                        <!-- 粵語語音導賞控制面板 -->
+                        <div class="rounded-2xl bg-harbour-950/90 border border-amber-400/30 p-4 mb-5 shadow-inner">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center">
+                                        <i class="fa-solid fa-headphones"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                                            粵語語音導賞 (廣東話)
+                                            <span id="voice-status-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                                就緒
+                                            </span>
+                                        </h4>
+                                        <p id="voice-engine-info" class="text-[11px] text-slate-400">自動偵測香港粵語語音引擎 (zh-HK)</p>
+                                    </div>
+                                </div>
+                                <!-- 動態聲波動畫 -->
+                                <div id="audio-wave" class="flex items-center gap-1 h-7 px-2">
+                                    <div class="wave-bar h-2"></div>
+                                    <div class="wave-bar h-3"></div>
+                                    <div class="wave-bar h-2"></div>
+                                    <div class="wave-bar h-4"></div>
+                                    <div class="wave-bar h-2"></div>
+                                    <div class="wave-bar h-3"></div>
+                                    <div class="wave-bar h-2"></div>
+                                </div>
+                            </div>
+
+                            <!-- 語音播放控制與語速切換 -->
+                            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-slate-800">
+                                <div class="flex items-center gap-1.5">
+                                    <button onclick="playCantoneseAudio()" id="btn-audio-play" class="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition">
+                                        <i class="fa-solid fa-volume-high"></i>
+                                        <span>朗讀粵語</span>
+                                    </button>
+                                    <button onclick="pauseCantoneseAudio()" id="btn-audio-pause" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs flex items-center gap-1.5 transition">
+                                        <i class="fa-solid fa-pause"></i>
+                                        <span>暫停</span>
+                                    </button>
+                                    <button onclick="replayCantoneseAudio()" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs transition" title="重播語音">
+                                        <i class="fa-solid fa-arrow-rotate-right"></i>
+                                    </button>
+                                </div>
+
+                                <!-- 語速調節 -->
+                                <div class="flex items-center bg-slate-900 rounded-lg p-0.5 border border-slate-800 text-xs">
+                                    <span class="px-2 text-slate-400 text-[11px]">語速</span>
+                                    <button onclick="setSpeechRate(0.8)" data-rate="0.8" class="rate-btn px-2 py-1 rounded-md text-slate-300 hover:text-white transition">0.8x</button>
+                                    <button onclick="setSpeechRate(1.0)" data-rate="1.0" class="rate-btn px-2 py-1 rounded-md bg-amber-500 text-slate-950 font-bold transition">1.0x</button>
+                                    <button onclick="setSpeechRate(1.2)" data-rate="1.2" class="rate-btn px-2 py-1 rounded-md text-slate-300 hover:text-white transition">1.2x</button>
+                                </div>
+                            </div>
+
+                            <!-- 裝置無粵語語音包時的友善提示（預設隱藏） -->
+                            <div id="no-cantonese-alert" class="hidden mb-3 p-2.5 rounded-xl bg-amber-950/70 border border-amber-500/40 text-amber-200 text-xs leading-relaxed">
+                                <i class="fa-solid fa-circle-info mr-1 text-amber-400"></i>
+                                偵測到您的裝置尚未安裝「香港粵語 (zh-HK)」語音包，系統將嘗試以預設中文語音朗讀，您亦可直接閱讀下方完整道地粵語導賞講稿：
+                            </div>
+
+                            <!-- 粵語導賞講稿與逐句高亮 -->
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between text-[11px] text-slate-400">
+                                    <span>粵語導賞講稿（點擊句子可跳轉朗讀）</span>
+                                    <button onclick="copyScript()" class="text-amber-400 hover:text-amber-300 flex items-center gap-1">
+                                        <i class="fa-regular fa-copy"></i>
+                                        <span id="copy-feedback">複製講稿</span>
+                                    </button>
+                                </div>
+                                <div id="cantonese-script-box" class="max-h-40 overflow-y-auto pr-1 space-y-1.5 text-sm leading-relaxed text-slate-200">
+                                    <!-- JS 動態生成分段講稿 -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 地標文化與建築簡介 -->
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">地標背景與特色</h4>
+                            <p id="detail-description" class="text-slate-300 text-sm leading-relaxed">
+                                <!-- JS 動態填入介紹 -->
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 底部切換上一個 / 下一個景點按鈕 -->
+                    <div class="pt-5 mt-5 border-t border-slate-800/80 flex items-center justify-between">
+                        <button onclick="switchLandmark(-1)" class="px-3.5 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-medium flex items-center gap-2 transition">
+                            <i class="fa-solid fa-chevron-left"></i>
+                            <span>上一個地標</span>
+                        </button>
+                        <div class="flex items-center gap-1.5" id="step-dots">
+                            <!-- JS 動態生成指示點 -->
+                        </div>
+                        <button onclick="switchLandmark(1)" class="px-3.5 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-medium flex items-center gap-2 transition">
+                            <span>下一個地標</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 互動小測驗區塊：「香港之最」知識挑戰 -->
+    <section id="quiz-section" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-amber-400/25 relative overflow-hidden">
+            <div class="absolute -right-12 -top-12 w-48 h-48 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+            
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-800">
+                <div>
+                    <span class="text-xs font-bold tracking-widest text-amber-400 uppercase">INTERACTIVE QUIZ</span>
+                    <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white mt-1">「香港之最」聽覺與視覺小測驗</h3>
+                    <p class="text-slate-300 text-sm mt-1">聽完粵語導賞後，考考自己對這三個世界級香港地標的認識！</p>
+                </div>
+                <div class="flex items-center gap-3 self-start sm:self-center bg-harbour-950/90 px-4 py-2.5 rounded-2xl border border-amber-400/30">
+                    <i class="fa-solid fa-trophy text-amber-400 text-xl"></i>
+                    <div>
+                        <div class="text-[11px] text-slate-400">目前得分</div>
+                        <div class="font-mono font-bold text-lg text-white"><span id="quiz-score">0</span> / <span id="quiz-total">5</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 測驗題目容器 -->
+            <div id="quiz-container">
+                <!-- JS 動態渲染測驗內容 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="border-t border-slate-800/80 bg-harbour-950 py-8 text-center text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p class="text-slate-300 font-medium">香港世界之最：地標視聽導賞</p>
+            <p>涵蓋中環至半山自動扶手電梯系統、大嶼山天壇大佛及青馬大橋之互動視覺動畫與粵語語音介紹</p>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * ==========================================
+         * 1. 三大香港世界之最地標資料庫（含道地粵語講稿與數據）
+         * ==========================================
+         */
+        const LANDMARKS = [
+            {
+                id: 'escalator',
+                shortTitle: '中環半山扶手電梯',
+                title: '中環至半山自動扶手電梯系統',
+                location: '香港 · 中環至半山',
+                recordBadge: '世界最長的戶外有蓋自動扶手電梯系統',
+                icon: 'fa-stairs',
+                duration: 30, // 影片模擬秒數
+                stats: [
+                    { label: '全長距離', value: '超過 800 米' },
+                    { label: '垂直爬升', value: '約 135 米' },
+                    { label: '啟用年份', value: '1993 年' }
+                ],
+                description: '中環至半山自動扶手電梯系統連接中環商業區與半山住宅區，全長超過800米，垂直差距達135米，由18條可轉換方向的自動扶手電梯及3條自動行人道組成。系統於1993年啟用，獲《健力士世界紀錄大全》確認為全球最長的戶外有蓋自動扶手電梯系統，更因電影《重慶森林》取景而聞名國際，沿途貫穿蘇豪區（SoHo）美食與文化地帶。',
+                // 分段粵語講稿，對應影片時間軸（秒）
+                scriptSegments: [
+                    { start: 0, end: 7, text: '各位觀眾大家好，歡迎嚟到香港心臟地帶——中環！' },
+                    { start: 7, end: 15, text: '大家眼前見到嘅，就係健力士世界紀錄認證、全球最長嘅戶外有蓋自動扶手電梯系統。' },
+                    { start: 15, end: 23, text: '成個系統全長超過八百米，由中環街市出發，一直延伸到半山干德道，垂直高度差成一百三十五米。' },
+                    { start: 23, end: 30, text: '搭住電梯穿梭喺摩天大廈同蘇豪區特色小店之間，絕對係體驗香港獨特都市節奏嘅最佳方式！' }
+                ]
+            },
+            {
+                id: 'buddha',
+                shortTitle: '大嶼山天壇大佛',
+                title: '天壇大佛（寶蓮禪寺）',
+                location: '香港 · 大嶼山昂坪',
+                recordBadge: '世界最大的露天青銅坐佛',
+                icon: 'fa-dharmachakra',
+                duration: 30,
+                stats: [
+                    { label: '佛像總高', value: '34 米' },
+                    { label: '佛像重量', value: '約 250 公噸' },
+                    { label: '石階級數', value: '268 級' }
+                ],
+                description: '坐落於香港大嶼山昂坪木魚峰上的天壇大佛，於1993年底開光，連蓮花座及基座總高度達34米，重約250公噸，由202塊青銅鑄件組成，是世界上最大的露天青銅坐佛。大佛面容祥和莊嚴，右手示「施無畏印」，左手下垂示「與願印」。訪客需登上268級石階方可到達大佛腳下，俯瞰大嶼山翠綠山巒與南中國海壯麗景色。',
+                scriptSegments: [
+                    { start: 0, end: 7, text: '依家我哋嚟到風景秀麗嘅香港大嶼山昂坪高原。' },
+                    { start: 7, end: 15, text: '企喺木魚峰頂嘅天壇大佛，連埋基座總高度有三十四米，係世界上最大嘅露天青銅坐佛。' },
+                    { start: 15, end: 23, text: '大佛由二百零二塊青銅鑄件組成，重達二百五十公噸，慈眉善目，俯瞰住成個大嶼山同南中國海。' },
+                    { start: 23, end: 30, text: '只要沿住二百六十八級石階慢慢行上去，喺雲霧繚繞之中，就能夠感受到一份寧靜莊嚴嘅禪意。' }
+                ]
+            },
+            {
+                id: 'bridge',
+                shortTitle: '香港青馬大橋',
+                title: '青馬大橋（青嶼幹線）',
+                location: '香港 · 青衣至馬灣',
+                recordBadge: '世界最長的行車鐵路雙用懸索吊橋',
+                icon: 'fa-bridge-water',
+                duration: 30,
+                stats: [
+                    { label: '主跨長度', value: '1,377 米' },
+                    { label: '橋塔高度', value: '206 米' },
+                    { label: '通車年份', value: '1997 年' }
+                ],
+                description: '青馬大橋橫跨馬灣海峽，連接青衣與馬灣，是通往香港國際機場的青嶼幹線核心建築。大橋主跨長1,377米，連引道全長2,160米，兩座橋塔高達206米。它採用雙層設計，上層為六線雙程高速公路，下層有蓋部分設有兩條機場快線及東涌線鐵路路軌及緊急行車道，是全球最長的行車鐵路雙用懸索吊橋，入夜後金色燈光璀璨奪目。',
+                scriptSegments: [
+                    { start: 0, end: 7, text: '最後我哋去到連接青衣同馬灣、橫跨馬灣海峽嘅宏偉建築——青馬大橋！' },
+                    { start: 7, end: 15, text: '青馬大橋主跨長達一千三百七十七米，係全球最長嘅行車鐵路雙用懸索吊橋。' },
+                    { start: 15, end: 23, text: '大橋採用獨特雙層設計，上層係六線高速公路，下層有蓋通道就俾機場快線同東涌線列車高速穿梭。' },
+                    { start: 23, end: 30, text: '無論係日頭海天一色，定係夜晚金色燈光閃耀，青馬大橋都係香港通往世界嘅璀璨門戶！' }
+                ]
+            }
+        ];
+
+        /**
+         * ==========================================
+         * 2. 互動小測驗題庫
+         * ==========================================
+         */
+        const QUIZ_QUESTIONS = [
+            {
+                question: '世界上最長的戶外有蓋自動扶手電梯系統位於香港哪一區？',
+                options: ['九龍尖沙咀', '香港島中環至半山', '新界沙田', '大嶼山東涌'],
+                answer: 1,
+                explanation: '中環至半山自動扶手電梯系統位於香港中環，全長超過 800 米，是全球最長的戶外有蓋自動扶手電梯系統。'
+            },
+            {
+                question: '位於香港大嶼山昂坪的天壇大佛，創下了哪一項世界紀錄？',
+                options: ['世界最高的室內木雕佛像', '世界最大的露天青銅坐佛', '世界最古老的石窟佛像', '世界最大的純金臥佛'],
+                answer: 1,
+                explanation: '天壇大佛連基座高 34 米、重約 250 公噸，是世界上最大的露天青銅坐佛。'
+            },
+            {
+                question: '青馬大橋之所以成為世界第一，是因為它是全球最長的哪一類橋樑？',
+                options: ['木造拱橋', '玻璃行人吊橋', '行車鐵路雙用懸索吊橋', '海底沉管隧道橋'],
+                answer: 2,
+                explanation: '青馬大橋主跨長 1,377 米，上層行車、下層行駛機場鐵路，是世界最長的行車鐵路雙用懸索吊橋。'
+            },
+            {
+                question: '訪客要登上大嶼山天壇大佛的基座，需要攀登多少級石階？',
+                options: ['108 級', '268 級', '365 級', '500 級'],
+                answer: 1,
+                explanation: '訪客需登上 268 級石階才能到達天壇大佛蓮花座下方，沿途可飽覽大嶼山壯麗景色。'
+            },
+            {
+                question: '青馬大橋主要連接香港哪兩個地方，成為通往香港國際機場的重要通道？',
+                options: ['中環與尖沙咀', '青衣與馬灣', '紅磡與銅鑼灣', '屯門與赤鱲角'],
+                answer: 1,
+                explanation: '青馬大橋橫跨馬灣海峽，連接青衣和馬灣，是青嶼幹線的重要組成部分。'
+            }
+        ];
+
+        /**
+         * ==========================================
+         * 3. 應用程式狀態管理
+         * ==========================================
+         */
+        let currentIndex = 0;
+        let isPlaying = false;
+        let videoElapsed = 0; // 秒
+        let lastFrameTimestamp = null;
+        let animationFrameId = null;
+
+        // 語音合成狀態
+        let synth = window.speechSynthesis;
+        let cantoneseVoice = null;
+        let hasCantoneseVoice = false;
+        let speechRate = 1.0;
+        let isSpeaking = false;
+        let currentSegmentIndex = -1;
+
+        // 測驗狀態
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+        let quizAnswered = false;
+
+        /**
+         * ==========================================
+         * 4. 初始化與粵語語音引擎偵測
+         * ==========================================
+         */
+        function initVoices() {
+            if (!synth) {
+                showNoCantoneseWarning();
+                return;
+            }
+            const voices = synth.getVoices();
+            if (voices.length === 0) return;
+
+            // 優先尋找香港粵語 (zh-HK / yue-HK / Cantonese)
+            cantoneseVoice = voices.find(v => 
+                v.lang.toLowerCase() === 'zh-hk' || 
+                v.lang.toLowerCase() === 'yue-hk' ||
+                v.lang.toLowerCase().includes('yue') ||
+                v.name.includes('Cantonese') ||
+                v.name.includes('Hong Kong') ||
+                v.name.includes('粵語') ||
+                v.name.includes('廣東話')
+            );
+
+            const infoEl = document.getElementById('voice-engine-info');
+            const alertEl = document.getElementById('no-cantonese-alert');
+
+            if (cantoneseVoice) {
+                hasCantoneseVoice = true;
+                infoEl.textContent = `已連線語音：${cantoneseVoice.name} (${cantoneseVoice.lang})`;
+                alertEl.classList.add('hidden');
+            } else {
+                // 後備：尋找一般繁體中文或中文語音
+                cantoneseVoice = voices.find(v => v.lang.toLowerCase().includes('zh')) || voices[0];
+                hasCantoneseVoice = false;
+                infoEl.textContent = cantoneseVoice ? `使用後備語音：${cantoneseVoice.name}` : '未偵測到系統語音';
+                alertEl.classList.remove('hidden');
+            }
+        }
+
+        function showNoCantoneseWarning() {
+            document.getElementById('no-cantonese-alert').classList.remove('hidden');
+            document.getElementById('voice-engine-info').textContent = '瀏覽器不支援語音朗讀，請閱讀文字導賞';
+        }
+
+        if (synth && synth.onvoiceschanged !== undefined) {
+            synth.onvoiceschanged = initVoices;
+        }
+
+        /**
+         * ==========================================
+         * 5. UI 渲染與地標切換邏輯
+         * ==========================================
+         */
+        function renderSelectorCards() {
+            const container = document.getElementById('landmark-selector');
+            container.innerHTML = LANDMARKS.map((item, idx) => {
+                const isActive = idx === currentIndex;
+                return `
+                    <button onclick="selectLandmark(${idx})" class="text-left p-4 sm:p-5 rounded-2xl transition-all duration-300 flex items-start gap-4 ${isActive ? 'glass-card-active scale-[1.01]' : 'glass-panel hover:border-amber-400/40 opacity-85 hover:opacity-100'}">
+                        <div class="w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center text-xl ${isActive ? 'bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 shadow-lg shadow-amber-500/30' : 'bg-harbour-800 text-amber-400'}">
+                            <i class="fa-solid ${item.icon}"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-[11px] font-semibold tracking-wider ${isActive ? 'text-amber-300' : 'text-slate-400'}">${item.location}</span>
+                                ${isActive ? '<span class="px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 text-[10px] font-bold">正在導賞</span>' : ''}
+                            </div>
+                            <h3 class="font-serif font-bold text-base sm:text-lg text-white truncate mt-0.5">${item.shortTitle}</h3>
+                            <p class="text-xs text-slate-300/90 line-clamp-1 mt-1">${item.recordBadge}</p>
+                        </div>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function renderLandmarkDetails() {
+            const data = LANDMARKS[currentIndex];
+            
+            document.getElementById('video-badge-location').textContent = data.location;
+            document.getElementById('video-world-record-tag').textContent = data.recordBadge;
+            document.getElementById('detail-record-badge').textContent = data.recordBadge;
+            document.getElementById('detail-title').textContent = data.title;
+            document.getElementById('detail-description').textContent = data.description;
+            document.getElementById('video-duration').textContent = formatTime(data.duration);
+
+            // 渲染數據卡片
+            document.getElementById('detail-stats').innerHTML = data.stats.map(st => `
+                <div class="p-2.5 rounded-xl bg-harbour-950/80 border border-slate-800 text-center">
+                    <div class="text-[11px] text-slate-400">${st.label}</div>
+                    <div class="font-bold text-xs sm:text-sm text-amber-300 mt-0.5">${st.value}</div>
+                </div>
+            `).join('');
+
+            // 渲染粵語講稿句子
+            const scriptBox = document.getElementById('cantonese-script-box');
+            scriptBox.innerHTML = data.scriptSegments.map((seg, i) => `
+                <p id="script-seg-${i}" onclick="jumpToSegment(${i})" class="p-2 rounded-lg cursor-pointer transition hover:bg-white/5 text-slate-300 border border-transparent">
+                    <span class="text-amber-400/80 font-mono text-xs mr-1.5">[${formatTime(seg.start)}]</span>${seg.text}
+                </p>
+            `).join('');
+
+            // 渲染底部指示點
+            document.getElementById('step-dots').innerHTML = LANDMARKS.map((_, i) => `
+                <button onclick="selectLandmark(${i})" class="h-2 rounded-full transition-all ${i === currentIndex ? 'w-6 bg-amber-400' : 'w-2 bg-slate-600 hover:bg-slate-400'}"></button>
+            `).join('');
+
+            updateSubtitleAndHighlight(0);
+        }
+
+        function selectLandmark(index) {
+            if (index === currentIndex) return;
+            stopAllMedia();
+            currentIndex = index;
+            videoElapsed = 0;
+            renderSelectorCards();
+            renderLandmarkDetails();
+            updateProgressUI();
+        }
+
+        function switchLandmark(delta) {
+            const next = (currentIndex + delta + LANDMARKS.length) % LANDMARKS.length;
+            selectLandmark(next);
+        }
+
+        /**
+         * ==========================================
+         * 6. 粵語語音合成控制 (Web Speech API)
+         * ==========================================
+         */
+        function playCantoneseAudio(startFromSegment = 0) {
+            if (!synth) return;
+            synth.cancel();
+
+            const data = LANDMARKS[currentIndex];
+            const segmentsToSpeak = data.scriptSegments.slice(startFromSegment);
+            if (segmentsToSpeak.length === 0) return;
+
+            isSpeaking = true;
+            updateAudioUIState(true);
+
+            let segOffset = startFromSegment;
+
+            function speakNext(idx) {
+                if (idx >= data.scriptSegments.length || !isSpeaking) {
+                    isSpeaking = false;
+                    updateAudioUIState(false);
+                    return;
+                }
+
+                const seg = data.scriptSegments[idx];
+                highlightScriptSegment(idx);
+
+                const utterance = new SpeechSynthesisUtterance(seg.text);
+                if (cantoneseVoice) {
+                    utterance.voice = cantoneseVoice;
+                }
+                utterance.lang = 'zh-HK';
+                utterance.rate = speechRate;
+                utterance.pitch = 1.02;
+
+                utterance.onend = () => {
+                    if (isSpeaking) {
+                        speakNext(idx + 1);
+                    }
+                };
+
+                utterance.onerror = () => {
+                    isSpeaking = false;
+                    updateAudioUIState(false);
+                };
+
+                synth.speak(utterance);
+            }
+
+            speakNext(segOffset);
+        }
+
+        function pauseCantoneseAudio() {
+            if (!synth) return;
+            if (synth.speaking && !synth.paused) {
+                synth.pause();
+                updateAudioUIState(false, '已暫停');
+            } else if (synth.paused) {
+                synth.resume();
+                updateAudioUIState(true, '朗讀中');
+            }
+        }
+
+        function replayCantoneseAudio() {
+            stopCantoneseAudio();
+            playCantoneseAudio(0);
+        }
+
+        function stopCantoneseAudio() {
+            isSpeaking = false;
+            if (synth) {
+                synth.cancel();
+            }
+            updateAudioUIState(false, '就緒');
+        }
+
+        function setSpeechRate(rate) {
+            speechRate = rate;
+            document.querySelectorAll('.rate-btn').forEach(btn => {
+                if (parseFloat(btn.dataset.rate) === rate) {
+                    btn.className = 'rate-btn px-2 py-1 rounded-md bg-amber-500 text-slate-950 font-bold transition';
+                } else {
+                    btn.className = 'rate-btn px-2 py-1 rounded-md text-slate-300 hover:text-white transition';
+                }
+            });
+            if (isSpeaking) {
+                const targetSeg = Math.max(0, currentSegmentIndex);
+                playCantoneseAudio(targetSeg);
+            }
+        }
+
+        function jumpToSegment(segIdx) {
+            const data = LANDMARKS[currentIndex];
+            videoElapsed = data.scriptSegments[segIdx].start;
+            updateProgressUI();
+            updateSubtitleAndHighlight(videoElapsed);
+            playCantoneseAudio(segIdx);
+        }
+
+        function updateAudioUIState(active, statusText) {
+            const wave = document.getElementById('audio-wave');
+            const badge = document.getElementById('voice-status-badge');
+            if (active) {
+                wave.classList.add('playing');
+                badge.textContent = statusText || '粵語朗讀中';
+                badge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-amber-500/25 text-amber-300 border border-amber-400/40';
+            } else {
+                wave.classList.remove('playing');
+                badge.textContent = statusText || '就緒';
+                badge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+            }
+        }
+
+        function highlightScriptSegment(idx) {
+            currentSegmentIndex = idx;
+            const data = LANDMARKS[currentIndex];
+            data.scriptSegments.forEach((_, i) => {
+                const el = document.getElementById(`script-seg-${i}`);
+                if (!el) return;
+                if (i === idx) {
+                    el.className = 'p-2 rounded-lg cursor-pointer transition bg-amber-500/20 text-amber-200 border border-amber-400/40 font-medium';
+                    document.getElementById('video-subtitle').textContent = data.scriptSegments[i].text;
+                } else {
+                    el.className = 'p-2 rounded-lg cursor-pointer transition hover:bg-white/5 text-slate-300 border border-transparent';
+                }
+            });
+        }
+
+        function copyScript() {
+            const data = LANDMARKS[currentIndex];
+            const fullText = `【${data.title} - 粵語導賞】\n` + data.scriptSegments.map(s => s.text).join('\n');
+            const textarea = document.createElement('textarea');
+            textarea.value = fullText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                const fb = document.getElementById('copy-feedback');
+                fb.textContent = '已複製！';
+                setTimeout(() => { fb.textContent = '複製講稿'; }, 2000);
+            } catch (e) {}
+            document.body.removeChild(textarea);
+        }
+
+        /**
+         * ==========================================
+         * 7. 同步影片與粵語導賞總控
+         * ==========================================
+         */
+        function toggleMasterPlay() {
+            if (isPlaying) {
+                pauseMaster();
+            } else {
+                playMaster();
+            }
+        }
+
+        function playMaster() {
+            const data = LANDMARKS[currentIndex];
+            if (videoElapsed >= data.duration) {
+                videoElapsed = 0;
+            }
+            isPlaying = true;
+            lastFrameTimestamp = performance.now();
+
+            document.getElementById('center-play-overlay').classList.add('hidden');
+            const btn = document.getElementById('btn-master-play');
+            btn.innerHTML = '<i class="fa-solid fa-pause"></i><span>暫停導賞影片</span>';
+
+            // 計算目前時間對應的講稿段落並啟動粵語朗讀
+            const segIdx = data.scriptSegments.findIndex(s => videoElapsed >= s.start && videoElapsed < s.end);
+            playCantoneseAudio(segIdx >= 0 ? segIdx : 0);
+        }
+
+        function pauseMaster() {
+            isPlaying = false;
+            document.getElementById('center-play-overlay').classList.remove('hidden');
+            const btn = document.getElementById('btn-master-play');
+            btn.innerHTML = '<i class="fa-solid fa-play"></i><span>繼續播放導賞</span>';
+            stopCantoneseAudio();
+        }
+
+        function restartExperience() {
+            stopAllMedia();
+            videoElapsed = 0;
+            updateProgressUI();
+            playMaster();
+        }
+
+        function stopAllMedia() {
+            isPlaying = false;
+            stopCantoneseAudio();
+            document.getElementById('center-play-overlay').classList.remove('hidden');
+            const btn = document.getElementById('btn-master-play');
+            btn.innerHTML = '<i class="fa-solid fa-play"></i><span>同步播放影片及粵語導賞</span>';
+        }
+
+        function seekVideo(e) {
+            const bar = document.getElementById('video-progress-bar');
+            const rect = bar.getBoundingClientRect();
+            const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+            const data = LANDMARKS[currentIndex];
+            videoElapsed = ratio * data.duration;
+            updateProgressUI();
+            updateSubtitleAndHighlight(videoElapsed);
+            if (isPlaying) {
+                const segIdx = data.scriptSegments.findIndex(s => videoElapsed >= s.start && videoElapsed < s.end);
+                playCantoneseAudio(segIdx >= 0 ? segIdx : 0);
+            }
+        }
+
+        function toggleFullscreen() {
+            const wrapper = document.getElementById('canvas-wrapper');
+            if (!document.fullscreenElement) {
+                wrapper.requestFullscreen().catch(() => {});
+            } else {
+                document.exitFullscreen().catch(() => {});
+            }
+        }
+
+        function updateProgressUI() {
+            const data = LANDMARKS[currentIndex];
+            const pct = Math.min(100, (videoElapsed / data.duration) * 100);
+            document.getElementById('video-progress-fill').style.width = `${pct}%`;
+            document.getElementById('video-current-time').textContent = formatTime(Math.floor(videoElapsed));
+        }
+
+        function updateSubtitleAndHighlight(timeSec) {
+            const data = LANDMARKS[currentIndex];
+            const idx = data.scriptSegments.findIndex(s => timeSec >= s.start && timeSec < s.end);
+            if (idx !== -1 && idx !== currentSegmentIndex && !isSpeaking) {
+                highlightScriptSegment(idx);
+            }
+        }
+
+        function formatTime(sec) {
+            const m = Math.floor(sec / 60).toString().padStart(2, '0');
+            const s = Math.floor(sec % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        /**
+         * ==========================================
+         * 8. HTML5 Canvas 動態實景模擬影片引擎
+         *    為三個香港地標繪製專屬動態運鏡場景
+         * ==========================================
+         */
+        const canvas = document.getElementById('landmark-canvas');
+        const ctx = canvas.getContext('2d');
+        let visualTick = 0;
+
+        function resizeCanvas() {
+            const wrapper = document.getElementById('canvas-wrapper');
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = wrapper.clientWidth * dpr;
+            canvas.height = wrapper.clientHeight * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+
+        // 主動畫迴圈
+        function renderLoop(timestamp) {
+            if (!lastFrameTimestamp) lastFrameTimestamp = timestamp;
+            const dt = (timestamp - lastFrameTimestamp) / 1000;
+            lastFrameTimestamp = timestamp;
+
+            const data = LANDMARKS[currentIndex];
+            if (isPlaying) {
+                videoElapsed += dt;
+                visualTick += dt;
+                if (videoElapsed >= data.duration) {
+                    videoElapsed = data.duration;
+                    pauseMaster();
+                }
+                updateProgressUI();
+                updateSubtitleAndHighlight(videoElapsed);
+            } else {
+                // 即使暫停也保持微幅環境光影流動
+                visualTick += dt * 0.25;
+            }
+
+            const w = canvas.clientWidth;
+            const h = canvas.clientHeight;
+            ctx.clearRect(0, 0, w, h);
+
+            if (data.id === 'escalator') {
+                drawCentralEscalatorScene(ctx, w, h, visualTick, videoElapsed / data.duration);
+            } else if (data.id === 'buddha') {
+                drawTianTanBuddhaScene(ctx, w, h, visualTick, videoElapsed / data.duration);
+            } else if (data.id === 'bridge') {
+                drawTsingMaBridgeScene(ctx, w, h, visualTick, videoElapsed / data.duration);
+            }
+
+            // 電影感微暗角與膠片時間碼疊加
+            drawCinemaOverlay(ctx, w, h, data);
+
+            animationFrameId = requestAnimationFrame(renderLoop);
+        }
+
+        // 場景一：中環至半山自動扶手電梯（繁華都會高樓 + 傾斜上行玻璃頂蓋電梯 + 蘇豪霓虹燈牌）
+        function drawCentralEscalatorScene(ctx, w, h, t, progress) {
+            // 黃昏至維港夜色漸層天空
+            const skyGrad = ctx.createLinearGradient(0, 0, 0, h);
+            skyGrad.addColorStop(0, '#09152E');
+            skyGrad.addColorStop(0.55, '#1E294B');
+            skyGrad.addColorStop(1, '#3B2846');
+            ctx.fillStyle = skyGrad;
+            ctx.fillRect(0, 0, w, h);
+
+            // 遠景中環摩天大廈群（視差緩慢移動）
+            const panX = -progress * 45;
+            const buildings = [
+                { x: 0.05, w: 0.11, h: 0.72, c: '#0D1B36', lights: true },
+                { x: 0.18, w: 0.14, h: 0.85, c: '#112244', lights: true }, // 象徵中銀/匯豐輪廓
+                { x: 0.35, w: 0.12, h: 0.65, c: '#0A162D', lights: true },
+                { x: 0.50, w: 0.16, h: 0.88, c: '#13274F', lights: true }, // 國金二期意象
+                { x: 0.69, w: 0.13, h: 0.70, c: '#0D1B36', lights: true },
+                { x: 0.84, w: 0.15, h: 0.78, c: '#10203E', lights: true }
+            ];
+
+            buildings.forEach((b, idx) => {
+                const bx = b.x * w + panX * (0.5 + idx * 0.08);
+                const bw = b.w * w;
+                const bh = b.h * h;
+                const by = h - bh;
+                ctx.fillStyle = b.c;
+                ctx.fillRect(bx, by, bw, bh);
+
+                // 大廈玻璃幕牆燈光
+                ctx.fillStyle = 'rgba(253, 224, 71, 0.22)';
+                for (let wy = by + 14; wy < h - 40; wy += 16) {
+                    for (let wx = bx + 8; wx < bx + bw - 10; wx += 12) {
+                        if ((Math.sin(wx + wy + idx) > 0.1)) {
+                            ctx.fillRect(wx, wy, 6, 8);
+                        }
+                    }
+                }
+            });
+
+            // 蘇豪區特色香港霓虹招牌
+            const neonSigns = [
+                { x: w * 0.14 + panX, y: h * 0.42, text: '中環半山', color: '#F59E0B' },
+                { x: w * 0.62 + panX, y: h * 0.36, text: 'SOHO 蘇豪', color: '#EC4899' },
+                { x: w * 0.80 + panX, y: h * 0.48, text: '蘭桂坊', color: '#38BDF8' }
+            ];
+            neonSigns.forEach(sign => {
+                ctx.save();
+                ctx.shadowColor = sign.color;
+                ctx.shadowBlur = 12;
+                ctx.strokeStyle = sign.color;
+                ctx.lineWidth = 2;
+                ctx.strokeRect(sign.x, sign.y, 76, 26);
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = 'bold 12px "Noto Sans HK"';
+                ctx.fillText(sign.text, sign.x + 10, sign.y + 17);
+                ctx.restore();
+            });
+
+            // 核心主體：斜向爬升的中環至半山有蓋自動扶手電梯系統
+            ctx.save();
+            const startX = -w * 0.05;
+            const startY = h * 0.92;
+            const endX = w * 1.05;
+            const endY = h * 0.34;
+            const angle = Math.atan2(endY - startY, endX - startX);
+            const length = Math.hypot(endX - startX, endY - startY);
+
+            ctx.translate(startX, startY);
+            ctx.rotate(angle);
+
+            // 支撐鋼柱
+            ctx.fillStyle = '#1E293B';
+            for (let px = 120; px < length; px += 220) {
+                ctx.fillRect(px, 18, 16, 260);
+            }
+
+            // 拱形玻璃遮雨棚頂蓋
+            ctx.fillStyle = 'rgba(56, 189, 248, 0.16)';
+            ctx.strokeStyle = 'rgba(251, 191, 36, 0.65)';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.roundRect(0, -68, length, 68, 18);
+            ctx.fill();
+            ctx.stroke();
+
+            // 頂棚骨架弧線
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+            ctx.lineWidth = 1.5;
+            for (let gx = 0; gx < length; gx += 45) {
+                ctx.beginPath();
+                ctx.moveTo(gx, -68);
+                ctx.lineTo(gx, 0);
+                ctx.stroke();
+            }
+
+            // 電梯主體結構槽
+            ctx.fillStyle = '#0F172A';
+            ctx.fillRect(0, -8, length, 28);
+
+            // 動態移動的電梯梯級與暖金扶手光帶
+            const stepOffset = (t * 48) % 24;
+            ctx.fillStyle = '#FBBF24';
+            ctx.fillRect(0, -14, length, 3); // 扶手帶
+
+            ctx.fillStyle = '#64748B';
+            for (let sx = -24 + stepOffset; sx < length; sx += 24) {
+                ctx.fillRect(sx, -5, 16, 5);
+            }
+
+            // 電梯上的剪影行人（隨電梯穩定向上移動）
+            for (let i = 0; i < 6; i++) {
+                const personX = ((t * 48 + i * 160) % (length - 60)) + 30;
+                // 身體與頭部
+                ctx.fillStyle = '#FDE68A';
+                ctx.beginPath();
+                ctx.arc(personX, -38, 4.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#E2E8F0';
+                ctx.beginPath();
+                ctx.roundRect(personX - 4, -32, 8, 22, 3);
+                ctx.fill();
+            }
+
+            ctx.restore();
+        }
+
+        // 場景二：大嶼山天壇大佛（翠綠山巒 + 268級石階 + 莊嚴青銅坐佛 + 流動山嵐雲霧）
+        function drawTianTanBuddhaScene(ctx, w, h, t, progress) {
+            // 晨曦金色與天藍色天空
+            const skyGrad = ctx.createLinearGradient(0, 0, 0, h);
+            skyGrad.addColorStop(0, '#0C2442');
+            skyGrad.addColorStop(0.5, '#1E4E68');
+            skyGrad.addColorStop(1, '#D97706');
+            ctx.fillStyle = skyGrad;
+            ctx.fillRect(0, 0, w, h);
+
+            // 大佛背後的神聖日暈光芒
+            const cx = w * 0.5;
+            const buddhaY = h * 0.36 - progress * 12; // 緩慢仰拍推進效果
+            const haloGrad = ctx.createRadialGradient(cx, buddhaY, 15, cx, buddhaY, w * 0.35);
+            haloGrad.addColorStop(0, 'rgba(254, 240, 138, 0.55)');
+            haloGrad.addColorStop(0.5, 'rgba(245, 158, 11, 0.18)');
+            haloGrad.addColorStop(1, 'rgba(245, 158, 11, 0)');
+            ctx.fillStyle = haloGrad;
+            ctx.fillRect(0, 0, w, h);
+
+            // 遠方大嶼山層巒疊嶂
+            ctx.fillStyle = '#0F2E2E';
+            ctx.beginPath();
+            ctx.moveTo(0, h);
+            ctx.lineTo(0, h * 0.62);
+            ctx.quadraticCurveTo(w * 0.25, h * 0.45, w * 0.5, h * 0.58);
+            ctx.quadraticCurveTo(w * 0.78, h * 0.42, w, h * 0.60);
+            ctx.lineTo(w, h);
+            ctx.fill();
+
+            // 木魚峰基座與蓮花座
+            const baseTopY = buddhaY + h * 0.18;
+            ctx.fillStyle = '#1E293B';
+            ctx.beginPath();
+            ctx.moveTo(cx - w * 0.18, h * 0.78);
+            ctx.lineTo(cx - w * 0.11, baseTopY);
+            ctx.lineTo(cx + w * 0.11, baseTopY);
+            ctx.lineTo(cx + w * 0.18, h * 0.78);
+            ctx.closePath();
+            ctx.fill();
+
+            // 蓮花座金色花瓣輪廓
+            ctx.fillStyle = '#92400E';
+            ctx.beginPath();
+            ctx.ellipse(cx, baseTopY, w * 0.095, 14, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 青銅天壇大佛莊嚴坐姿剪影與銅光高光
+            const bronzeGrad = ctx.createLinearGradient(cx - 50, buddhaY - 60, cx + 50, baseTopY);
+            bronzeGrad.addColorStop(0, '#B45309');
+            bronzeGrad.addColorStop(0.4, '#451A03');
+            bronzeGrad.addColorStop(1, '#1C1917');
+            ctx.fillStyle = bronzeGrad;
+
+            // 盤膝雙腿與袈裟
+            ctx.beginPath();
+            ctx.ellipse(cx, baseTopY - 12, w * 0.085, 22, 0, Math.PI, Math.PI * 2);
+            ctx.fill();
+
+            // 軀幹與雙肩
+            ctx.beginPath();
+            ctx.moveTo(cx - w * 0.06, baseTopY - 10);
+            ctx.quadraticCurveTo(cx - w * 0.055, buddhaY - 15, cx - w * 0.025, buddhaY - 25);
+            ctx.lineTo(cx + w * 0.025, buddhaY - 25);
+            ctx.quadraticCurveTo(cx + w * 0.055, buddhaY - 15, cx + w * 0.06, baseTopY - 10);
+            ctx.closePath();
+            ctx.fill();
+
+            // 佛首與肉髻
+            ctx.beginPath();
+            ctx.arc(cx, buddhaY - 40, 17, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(cx, buddhaY - 56, 8, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 右手「施無畏印」
+            ctx.strokeStyle = '#D97706';
+            ctx.lineWidth = 5;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(cx - 22, buddhaY - 5);
+            ctx.lineTo(cx - 26, buddhaY - 22);
+            ctx.stroke();
+
+            // 268級石階（透視向下延伸）
+            ctx.fillStyle = '#334155';
+            ctx.beginPath();
+            ctx.moveTo(cx - w * 0.05, h * 0.78);
+            ctx.lineTo(cx + w * 0.05, h * 0.78);
+            ctx.lineTo(cx + w * 0.16, h);
+            ctx.lineTo(cx - w * 0.16, h);
+            ctx.closePath();
+            ctx.fill();
+
+            // 石階橫紋
+            ctx.strokeStyle = 'rgba(251, 191, 36, 0.35)';
+            ctx.lineWidth = 1.5;
+            for (let sy = h * 0.79; sy < h; sy += 7) {
+                const ratio = (sy - h * 0.78) / (h * 0.22);
+                const halfW = w * (0.05 + ratio * 0.11);
+                ctx.beginPath();
+                ctx.moveTo(cx - halfW, sy);
+                ctx.lineTo(cx + halfW, sy);
+                ctx.stroke();
+            }
+
+            // 流動的山嵐雲霧效果
+            for (let i = 0; i < 5; i++) {
+                const cloudX = ((t * (18 + i * 5) + i * 190) % (w + 260)) - 130;
+                const cloudY = h * (0.48 + (i % 3) * 0.1);
+                const cloudGrad = ctx.createRadialGradient(cloudX, cloudY, 10, cloudX, cloudY, 110);
+                cloudGrad.addColorStop(0, 'rgba(255, 255, 255, 0.22)');
+                cloudGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                ctx.fillStyle = cloudGrad;
+                ctx.fillRect(cloudX - 110, cloudY - 40, 220, 80);
+            }
+        }
+
+        // 場景三：青馬大橋（海峽波光 + 雙橋塔與金色懸索 + 上層車流與下層機場快線列車）
+        function drawTsingMaBridgeScene(ctx, w, h, t, progress) {
+            // 維港及馬灣海峽夜色漸層
+            const skyGrad = ctx.createLinearGradient(0, 0, 0, h * 0.72);
+            skyGrad.addColorStop(0, '#030712');
+            skyGrad.addColorStop(0.6, '#0B1D3A');
+            skyGrad.addColorStop(1, '#1E3A5F');
+            ctx.fillStyle = skyGrad;
+            ctx.fillRect(0, 0, w, h);
+
+            // 點點繁星
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            for (let s = 0; s < 25; s++) {
+                const sx = (s * 97) % w;
+                const sy = (s * 43) % (h * 0.4);
+                ctx.fillRect(sx, sy, 1.5, 1.5);
+            }
+
+            // 馬灣海峽水面
+            const seaY = h * 0.72;
+            const seaGrad = ctx.createLinearGradient(0, seaY, 0, h);
+            seaGrad.addColorStop(0, '#061326');
+            seaGrad.addColorStop(1, '#020617');
+            ctx.fillStyle = seaGrad;
+            ctx.fillRect(0, seaY, w, h - seaY);
+
+            // 海面金色倒影波紋
+            ctx.strokeStyle = 'rgba(251, 191, 36, 0.25)';
+            ctx.lineWidth = 1.5;
+            for (let wy = seaY + 8; wy < h; wy += 10) {
+                const waveShift = Math.sin(t * 2 + wy) * 18;
+                ctx.beginPath();
+                ctx.moveTo(w * 0.15 + waveShift, wy);
+                ctx.lineTo(w * 0.85 - waveShift, wy);
+                ctx.stroke();
+            }
+
+            // 兩座 206 米高主橋塔位置
+            const tower1X = w * 0.26;
+            const tower2X = w * 0.74;
+            const towerTopY = h * 0.18;
+            const deckY = h * 0.56;
+
+            // 繪製橋塔函數
+            function drawTower(tx) {
+                ctx.fillStyle = '#1E293B';
+                ctx.fillRect(tx - 12, towerTopY, 8, seaY - towerTopY + 12);
+                ctx.fillRect(tx + 4, towerTopY, 8, seaY - towerTopY + 12);
+                // 橋塔橫樑與塔頂航空警示紅燈
+                ctx.fillStyle = '#334155';
+                ctx.fillRect(tx - 12, towerTopY + 15, 24, 7);
+                ctx.fillRect(tx - 12, towerTopY + 55, 24, 7);
+                ctx.fillRect(tx - 14, deckY - 6, 28, 16);
+
+                // 塔頂閃爍紅燈
+                if (Math.sin(t * 5) > 0) {
+                    ctx.fillStyle = '#EF4444';
+                    ctx.beginPath();
+                    ctx.arc(tx, towerTopY - 4, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            drawTower(tower1X);
+            drawTower(tower2X);
+
+            // 金色主懸索（拋物線）
+            ctx.strokeStyle = '#FBBF24';
+            ctx.lineWidth = 3;
+            ctx.shadowColor = '#F59E0B';
+            ctx.shadowBlur = 10;
+
+            // 左側引橋主纜
+            ctx.beginPath();
+            ctx.moveTo(0, deckY);
+            ctx.quadraticCurveTo(tower1X * 0.5, deckY - 15, tower1X, towerTopY + 6);
+            ctx.stroke();
+
+            // 中央 1,377 米主跨懸索
+            ctx.beginPath();
+            ctx.moveTo(tower1X, towerTopY + 6);
+            ctx.quadraticCurveTo(w * 0.5, deckY - 10, tower2X, towerTopY + 6);
+            ctx.stroke();
+
+            // 右側引橋主纜
+            ctx.beginPath();
+            ctx.moveTo(tower2X, towerTopY + 6);
+            ctx.quadraticCurveTo(tower2X + (w - tower2X) * 0.5, deckY - 15, w, deckY);
+            ctx.stroke();
+
+            ctx.shadowBlur = 0;
+
+            // 垂直吊索
+            ctx.strokeStyle = 'rgba(253, 224, 71, 0.35)';
+            ctx.lineWidth = 1;
+            for (let sx = tower1X + 16; sx < tower2X; sx += 18) {
+                const norm = (sx - tower1X) / (tower2X - tower1X);
+                const cableY = towerTopY + 6 + 4 * ((deckY - 10) - (towerTopY + 6)) * norm * (1 - norm);
+                ctx.beginPath();
+                ctx.moveTo(sx, cableY);
+                ctx.lineTo(sx, deckY);
+                ctx.stroke();
+            }
+
+            // 雙層橋面結構（上層行車、下層機場快線鐵路）
+            ctx.fillStyle = '#0F172A';
+            ctx.fillRect(0, deckY, w, 16);
+            ctx.strokeStyle = '#F59E0B';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(0, deckY);
+            ctx.lineTo(w, deckY);
+            ctx.stroke();
+
+            // 上層高速公路流動車燈（白光與紅尾燈）
+            for (let c = 0; c < 8; c++) {
+                const carX1 = (t * 110 + c * 135) % w;
+                ctx.fillStyle = '#FEF08A';
+                ctx.fillRect(carX1, deckY - 3, 7, 2.5);
+
+                const carX2 = w - ((t * 95 + c * 150) % w);
+                ctx.fillStyle = '#EF4444';
+                ctx.fillRect(carX2, deckY - 2, 6, 2);
+            }
+
+            // 下層有蓋通道行駛的「機場快線」高速列車（青綠色流線光帶）
+            const trainX = ((t * 160) % (w + 240)) - 120;
+            ctx.fillStyle = '#14B8A6';
+            ctx.shadowColor = '#2DD4BF';
+            ctx.shadowBlur = 8;
+            ctx.fillRect(trainX, deckY + 6, 95, 5);
+            ctx.shadowBlur = 0;
+        }
+
+        // 影片畫面角落資訊疊加
+        function drawCinemaOverlay(ctx, w, h, data) {
+            // 四周微暗角
+            const rad = ctx.createRadialGradient(w / 2, h / 2, w * 0.3, w / 2, h / 2, w * 0.75);
+            rad.addColorStop(0, 'rgba(0,0,0,0)');
+            rad.addColorStop(1, 'rgba(0,0,0,0.45)');
+            ctx.fillStyle = rad;
+            ctx.fillRect(0, 0, w, h);
+        }
+
+        /**
+         * ==========================================
+         * 9. 互動小測驗邏輯
+         * ==========================================
+         */
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            document.getElementById('quiz-total').textContent = QUIZ_QUESTIONS.length;
+            document.getElementById('quiz-score').textContent = quizScore;
+
+            if (currentQuizIndex >= QUIZ_QUESTIONS.length) {
+                const pct = Math.round((quizScore / QUIZ_QUESTIONS.length) * 100);
+                let comment = '繼續加油！再聽一次粵語導賞必定滿分！';
+                if (pct === 100) comment = '太厲害了！您完全掌握了香港三大世界紀錄地標的精髓！';
+                else if (pct >= 60) comment = '成績相當不錯！您對香港的世界之最非常熟悉！';
+
+                container.innerHTML = `
+                    <div class="text-center py-8 space-y-4">
+                        <div class="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400 flex items-center justify-center text-3xl text-amber-300">
+                            <i class="fa-solid fa-medal"></i>
+                        </div>
+                        <h4 class="font-serif text-2xl font-bold text-white">測驗完成！您的總分：${quizScore} / ${QUIZ_QUESTIONS.length}</h4>
+                        <p class="text-slate-300 text-sm max-w-md mx-auto">${comment}</p>
+                        <button onclick="resetQuiz()" class="mt-4 px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm transition">
+                            重新挑戰測驗
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            const q = QUIZ_QUESTIONS[currentQuizIndex];
+            quizAnswered = false;
+
+            container.innerHTML = `
+                <div class="space-y-5">
+                    <div class="flex items-center justify-between text-xs text-amber-300 font-medium">
+                        <span>第 ${currentQuizIndex + 1} 題（共 ${QUIZ_QUESTIONS.length} 題）</span>
+                        <span>單選題</span>
+                    </div>
+                    <h4 class="text-lg sm:text-xl font-bold text-white leading-snug">${q.question}</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="quiz-options">
+                        ${q.options.map((opt, idx) => `
+                            <button onclick="submitQuizAnswer(${idx})" id="quiz-opt-${idx}" class="text-left p-4 rounded-2xl bg-harbour-950/80 hover:bg-harbour-800 border border-slate-700/80 hover:border-amber-400/50 text-slate-200 text-sm font-medium transition flex items-center gap-3">
+                                <span class="w-7 h-7 rounded-lg bg-slate-800 text-amber-400 font-bold text-xs flex items-center justify-center flex-shrink-0">
+                                    ${String.fromCharCode(65 + idx)}
+                                </span>
+                                <span>${opt}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div id="quiz-feedback" class="hidden p-4 rounded-2xl text-sm leading-relaxed"></div>
+                    <div class="flex justify-end">
+                        <button id="btn-next-question" onclick="nextQuizQuestion()" class="hidden px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm transition items-center gap-2">
+                            <span>${currentQuizIndex === QUIZ_QUESTIONS.length - 1 ? '查看總成績' : '下一題'}</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function submitQuizAnswer(selectedIdx) {
+            if (quizAnswered) return;
+            quizAnswered = true;
+
+            const q = QUIZ_QUESTIONS[currentQuizIndex];
+            const isCorrect = selectedIdx === q.answer;
+            if (isCorrect) {
+                quizScore++;
+                document.getElementById('quiz-score').textContent = quizScore;
+            }
+
+            q.options.forEach((_, idx) => {
+                const btn = document.getElementById(`quiz-opt-${idx}`);
+                btn.disabled = true;
+                if (idx === q.answer) {
+                    btn.className = 'text-left p-4 rounded-2xl bg-emerald-950/80 border-2 border-emerald-400 text-emerald-200 text-sm font-bold flex items-center gap-3';
+                } else if (idx === selectedIdx && !isCorrect) {
+                    btn.className = 'text-left p-4 rounded-2xl bg-red-950/70 border border-red-400 text-red-200 text-sm font-medium flex items-center gap-3';
+                } else {
+                    btn.className = 'text-left p-4 rounded-2xl bg-harbour-950/40 border border-slate-800 text-slate-500 text-sm flex items-center gap-3';
+                }
+            });
+
+            const fb = document.getElementById('quiz-feedback');
+            fb.classList.remove('hidden');
+            fb.className = `p-4 rounded-2xl text-sm leading-relaxed border ${isCorrect ? 'bg-emerald-950/50 border-emerald-500/40 text-emerald-200' : 'bg-amber-950/50 border-amber-500/40 text-amber-200'}`;
+            fb.innerHTML = `<strong>${isCorrect ? '答對了！' : '差一點點！'}</strong> ${q.explanation}`;
+
+            const nextBtn = document.getElementById('btn-next-question');
+            nextBtn.classList.remove('hidden');
+            nextBtn.classList.add('inline-flex');
+        }
+
+        function nextQuizQuestion() {
+            currentQuizIndex++;
+            renderQuiz();
+        }
+
+        function resetQuiz() {
+            currentQuizIndex = 0;
+            quizScore = 0;
+            renderQuiz();
+        }
+
+        /**
+         * ==========================================
+         * 10. 頁面載入啟動
+         * ==========================================
+         */
+        window.onload = function() {
+            initVoices();
+            renderSelectorCards();
+            renderLandmarkDetails();
+            renderQuiz();
+            resizeCanvas();
+            requestAnimationFrame(renderLoop);
+        };
+    </script>
+</body>
+</html>
